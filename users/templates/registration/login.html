@@ -1,0 +1,17 @@
+{% extends "learning_logs/base.html" %}
+{% block title %}Вход · Learning Log{% endblock title %}
+{% block content %}
+<h1>Вход</h1>
+{% if form.errors %}
+  <p class="msg msg-error">Неверное имя пользователя или пароль. Проверьте данные и попробуйте снова.</p>
+{% endif %}
+<form class="form" method="post" action="{% url 'users:login' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="hidden" name="next" value="{{ next|default:'' }}">
+  <div class="actions">
+    <button class="btn" type="submit">Войти</button>
+    <a class="btn btn-ghost" href="{% url 'users:register' %}">Создать аккаунт</a>
+  </div>
+</form>
+{% endblock content %}

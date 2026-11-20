@@ -1,0 +1,26 @@
+{% extends "learning_logs/base.html" %}
+{% block title %}Темы · Learning Log{% endblock title %}
+{% block content %}
+<div class="page-head">
+  <h1>Ваши темы</h1>
+  <a class="btn" href="{% url 'learning_logs:new_topic' %}">Новая тема</a>
+</div>
+
+{% if topics %}
+<ul class="topic-list">
+  {% for topic in topics %}
+  <li>
+    <a class="topic-row" href="{% url 'learning_logs:topic' topic.id %}">
+      <span class="topic-name">{{ topic }}</span>
+      <span class="topic-meta">Записей: {{ topic.entries_count }} · с {{ topic.date_added|date:"j E Y" }}</span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="empty">
+  <p>Здесь пока пусто. Начните с первой темы — например, того, что изучаете прямо сейчас.</p>
+  <a class="btn" href="{% url 'learning_logs:new_topic' %}">Создать первую тему</a>
+</div>
+{% endif %}
+{% endblock content %}

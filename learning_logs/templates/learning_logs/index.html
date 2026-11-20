@@ -1,0 +1,25 @@
+{% extends "learning_logs/base.html" %}
+{% block title %}Learning Log — журнал обучения{% endblock title %}
+{% block content %}
+<section class="hero">
+  <h1>Записывайте то, что&nbsp;узнали. Возвращайтесь, когда забудете.</h1>
+  <p class="lead">Заведите тему — шахматы, Python, право, скалолазание — и добавляйте к ней короткие заметки по мере обучения. Всё хранится по датам и принадлежит только вам.</p>
+  <div class="actions">
+    {% if user.is_authenticated %}
+      <a class="btn" href="{% url 'learning_logs:topics' %}">Открыть мои темы</a>
+      <a class="btn btn-ghost" href="{% url 'learning_logs:new_topic' %}">Новая тема</a>
+    {% else %}
+      <a class="btn" href="{% url 'users:register' %}">Начать вести журнал</a>
+      <a class="btn btn-ghost" href="{% url 'users:login' %}">У меня уже есть аккаунт</a>
+    {% endif %}
+  </div>
+</section>
+
+<section class="sample" aria-label="Пример записи">
+  <div class="note-date">19 ноября, 14:05</div>
+  <div class="note">
+    <h2>Шахматы</h2>
+    <p>В дебюте сначала развиваем фигуры, а не гоняем одну и ту же дважды. Центр — приоритет, рокировка — до атаки.</p>
+  </div>
+</section>
+{% endblock content %}
